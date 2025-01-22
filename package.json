@@ -1,0 +1,23 @@
+{
+  "name": "express-blog-api-crud",
+  "version": "1.0.0",
+  "description": "Blog API Crud exercise",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "watch": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattiadelmonaco/express-blog-api-crud.git"
+  },
+  "author": "Mattia Del Monaco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattiadelmonaco/express-blog-api-crud/issues"
+  },
+  "homepage": "https://github.com/mattiadelmonaco/express-blog-api-crud#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
