@@ -1,83 +1,27 @@
-// imports
-const posts = require("../data/postsData")
+// controllers imports
+const postsCrontroller = require("../controllers/postsController")
 
 // import express and create router's variable
 const express = require("express")
 const router = express.Router()
 
 // Index 
-router.get("/", (req, res) => {
-    res.json(posts)
-})
+router.get("/", postsCrontroller.index)
 
 // Show
-router.get("/:id", (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
-    const post = posts.find((elm) => elm.id == req.params.id)
-
-        if (post) {
-            res.json(post)
-        } else {
-            res.sendStatus(404)
-        }
-})
+router.get("/:id", postsCrontroller.show)
 
 // Create
-router.post("/", (req, res) => {
-    res.send("Creo un nuovo post ✔")
-})
+router.post("/", postsCrontroller.create)
 
 // Update
-router.put("/:id", (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
-    const post = posts.find((elm) => elm.id == req.params.id)
-
-    if (post) {
-        res.send(`Modifico interamente il post con id ${req.params.id}`)
-    } else {
-        res.sendStatus(404)
-    }
-})
+router.put("/:id", postsCrontroller.update)
 
 // Modify
-router.patch("/:id", (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
-    const post = posts.find((elm) => elm.id == req.params.id)
-
-    if (post) {
-        res.send(`Modifico parzialmente il post con id ${req.params.id}`)
-    } else {
-        res.sendStatus(404)
-    }
-})
+router.patch("/:id", postsCrontroller.modify)
 
 // Destroy
-router.delete("/:id", (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
-    const post = posts.find((elm) => elm.id == req.params.id)
-
-    if (post) {
-        res.send(`Elimino il post con id ${req.params.id}`)
-    } else {
-        res.sendStatus(404)
-    }
-})
+router.delete("/:id", postsCrontroller.destroy)
 
 // exports
 module.exports = router
