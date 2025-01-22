@@ -19,10 +19,6 @@ const index = (req, res) => {
 // Show
 const show = (req, res) => {
 
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
     const id = parseInt(req.params.id)
 
     const post = posts.find((elm) => elm.id === id)
@@ -46,11 +42,7 @@ const create = (req, res) => {
 
 // Update
 const update = (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
-
+   
     const id = parseInt(req.params.id)
 
     const post = posts.find((elm) => elm.id === id)
@@ -58,16 +50,17 @@ const update = (req, res) => {
     if (post) {
         res.send(`Modifico interamente il post con id ${id}`)
     } else {
-        res.sendStatus(404)
+        res.status(404)
+        return res.json({
+            status: 404, 
+            error: "Not Found", 
+            message: `Post con ID ${id} non trovato!`
+        })
     }
 }
 
 // Modify
 const modify = (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
 
     const id = parseInt(req.params.id)
 
@@ -76,16 +69,17 @@ const modify = (req, res) => {
     if (post) {
         res.send(`Modifico parzialmente il post con id ${id}`)
     } else {
-        res.sendStatus(404)
+        res.status(404)
+        return res.json({
+            status: 404, 
+            error: "Not Found", 
+            message: `Post con ID ${id} non trovato!`
+        })
     }
 }
 
 // Destroy
 const destroy = (req, res) => {
-
-    if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
-    }
 
     const id = parseInt(req.params.id)
 

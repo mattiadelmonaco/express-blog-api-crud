@@ -1,9 +1,15 @@
+// import middlewareValidationId
+const middlewareValidationId = require("../middlewares/validationIdParam")
+
 // controllers imports
 const postsCrontroller = require("../controllers/postsController")
 
 // import express and create router's variable
 const express = require("express")
 const router = express.Router()
+
+// validation on ID calls
+router.use("/:id", middlewareValidationId)
 
 // Index 
 router.get("/", postsCrontroller.index)
