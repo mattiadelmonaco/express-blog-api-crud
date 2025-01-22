@@ -6,7 +6,14 @@ const posts = require("../data/postsData")
 
 // Index
 const index = (req, res) => {
-    res.json(posts)
+
+    let filteredPosts = posts
+    
+    if (req.query.tags) {
+        filteredPosts = posts.filter((post) => post.tags.includes(req.query.tags))
+    } 
+    
+    res.json(filteredPosts)
 }
 
 // Show
@@ -16,12 +23,19 @@ const show = (req, res) => {
         return res.sendStatus(400)
     }
 
-    const post = posts.find((elm) => elm.id == req.params.id)
+    const id = parseInt(req.params.id)
+
+    const post = posts.find((elm) => elm.id === id)
 
         if (post) {
             res.json(post)
         } else {
-            res.sendStatus(404)
+            res.status(404)
+            return res.json({
+                status: 404, 
+                error: "Not Found", 
+                message: `Post con ID ${id} non trovato!`
+            })
         }
 }
 
@@ -37,10 +51,12 @@ const update = (req, res) => {
         return res.sendStatus(400)
     }
 
-    const post = posts.find((elm) => elm.id == req.params.id)
+    const id = parseInt(req.params.id)
+
+    const post = posts.find((elm) => elm.id === id)
 
     if (post) {
-        res.send(`Modifico interamente il post con id ${req.params.id}`)
+        res.send(`Modifico interamente il post con id ${id}`)
     } else {
         res.sendStatus(404)
     }
@@ -53,10 +69,12 @@ const modify = (req, res) => {
         return res.sendStatus(400)
     }
 
-    const post = posts.find((elm) => elm.id == req.params.id)
+    const id = parseInt(req.params.id)
+
+    const post = posts.find((elm) => elm.id === id)
 
     if (post) {
-        res.send(`Modifico parzialmente il post con id ${req.params.id}`)
+        res.send(`Modifico parzialmente il post con id ${id}`)
     } else {
         res.sendStatus(404)
     }
