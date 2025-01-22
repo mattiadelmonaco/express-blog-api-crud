@@ -69,12 +69,21 @@ const destroy = (req, res) => {
         return res.sendStatus(400)
     }
 
-    const post = posts.find((elm) => elm.id == req.params.id)
+    const id = parseInt(req.params.id)
+
+    const post = posts.find((post) => post.id === id)
 
     if (post) {
-        res.send(`Elimino il post con id ${req.params.id}`)
+        posts.splice(posts.indexOf(post), 1)
+        console.log(posts)
+        return res.sendStatus(204)
     } else {
-        res.sendStatus(404)
+        res.status(404)
+        return res.json({
+            status: 404, 
+            error: "Not Found", 
+            message: `Post con ID ${id} non trovato!`
+        })
     }
 }
 
