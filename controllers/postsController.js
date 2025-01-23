@@ -23,22 +23,22 @@ const show = (req, res) => {
 
     const post = posts.find((elm) => elm.id === id)
 
-        if (post) {
-            res.json(post)
-        } else {
+        if (!post) {
             res.status(404)
             return res.json({
                 status: 404, 
                 error: "Not Found", 
                 message: `Post con ID ${id} non trovato!`
             })
-        }
+        } 
+        
+    res.json(post)
 }
 
 // Store
 const create = (req, res) => {
 
-    const newId = posts[posts.length - 1].id + 1;
+    const newId = posts[posts.length - 1].id + 1
 
     const newPost = {
         id: newId,
@@ -134,18 +134,18 @@ const destroy = (req, res) => {
 
     const post = posts.find((post) => post.id === id)
 
-    if (post) {
-        posts.splice(posts.indexOf(post), 1)
-        console.log(posts)
-        return res.sendStatus(204)
-    } else {
+    if (!post) {
         res.status(404)
         return res.json({
             status: 404, 
             error: "Not Found", 
             message: `Post con ID ${id} non trovato!`
-        })
-    }
+        }) 
+    } 
+
+    posts.splice(posts.indexOf(post), 1)
+    console.log(posts)
+    return res.sendStatus(204)
 }
 
 module.exports = {index, show, create, update, modify, destroy}
