@@ -87,7 +87,6 @@ const update = (req, res) => {
         message: "Post aggiornato con successo",
         post
     })
-
 }
 
 // Modify
@@ -97,16 +96,35 @@ const modify = (req, res) => {
 
     const post = posts.find((elm) => elm.id === id)
 
-    if (post) {
-        res.send(`Modifico parzialmente il post con id ${id}`)
-    } else {
+    if (!post) {
         res.status(404)
         return res.json({
             status: 404, 
             error: "Not Found", 
-            message: `Post con ID ${id} non trovato!`
+            message: `Post con ID ${id} non trovato!` 
         })
     }
+
+    if (req.body.title) {
+        post.title = req.body.title;
+      }
+    if (req.body.content) {
+    post.content = req.body.content;
+    }
+    if (req.body.image) {
+    post.image = req.body.image;
+    }
+    if (req.body.tags) {
+    post.tags = req.body.tags;
+    }
+
+    console.log(post)
+    res.status(200)
+    res.json({
+        status: 200,
+        message: "Post aggiornato con successo",
+        post
+    })
 }
 
 // Destroy
