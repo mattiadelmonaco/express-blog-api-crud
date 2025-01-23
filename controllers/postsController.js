@@ -66,16 +66,28 @@ const update = (req, res) => {
 
     const post = posts.find((elm) => elm.id === id)
 
-    if (post) {
-        res.send(`Modifico interamente il post con id ${id}`)
-    } else {
+    if (!post) {
         res.status(404)
         return res.json({
             status: 404, 
             error: "Not Found", 
-            message: `Post con ID ${id} non trovato!`
+            message: `Post con ID ${id} non trovato!` 
         })
     }
+
+    post.title = req.body.title
+    post.content = req.body.content
+    post.image = req.body.image
+    post.tags = req.body.tags
+
+    console.log(post)
+    res.status(200)
+    res.json({
+        status: 200,
+        message: "Post aggiornato con successo",
+        post
+    })
+
 }
 
 // Modify
