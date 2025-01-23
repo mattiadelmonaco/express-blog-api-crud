@@ -49,6 +49,7 @@ const create = (req, res) => {
     }
 
     posts.push(newPost)
+    console.log(newPost)
 
     res.status(201)
     res.json({
