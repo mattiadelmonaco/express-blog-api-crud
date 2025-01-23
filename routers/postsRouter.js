@@ -17,7 +17,7 @@ router.get("/", postsCrontroller.index)
 // Show
 router.get("/:id", postsCrontroller.show)
 
-// Create
+// Store
 router.post("/", postsCrontroller.create)
 
 // Update

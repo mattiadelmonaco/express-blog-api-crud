@@ -12,6 +12,9 @@ const port = 3000
 // to get static files
 app.use(express.static("public"))
 
+// to decode the request-body for application/json
+app.use(express.json())
+
 // routers
 app.use("/posts", postsRouter)
 
