@@ -1,8 +1,5 @@
 // imports
-
 const posts = require("../data/postsData")
-
-// crud functions
 
 // Index
 const index = (req, res) => {
@@ -25,8 +22,7 @@ const show = (req, res) => {
     const post = posts.find((elm) => elm.id === id)
 
         if (!post) {
-            res.status(404)
-            return res.json({
+            return res.status(404).json({
                 status: 404, 
                 error: "Not Found", 
                 message: `Post con ID ${id} non trovato!`
@@ -52,8 +48,7 @@ const create = (req, res) => {
     posts.push(newPost)
     console.log(newPost)
 
-    res.status(201)
-    res.json({
+    res.status(201).json({
         status: 201,
         message: "Post aggiunto con successo!",
         post: newPost
@@ -68,22 +63,20 @@ const update = (req, res) => {
     const post = posts.find((elm) => elm.id === id)
 
     if (!post) {
-        res.status(404)
-        return res.json({
+        return res.status(404).json({
             status: 404, 
             error: "Not Found", 
             message: `Post con ID ${id} non trovato!` 
         })
     }
 
-    post.title = req.body.title
-    post.content = req.body.content
-    post.image = req.body.image
-    post.tags = req.body.tags
+    post.title = req.body.title || "Titolo mancante"
+    post.content = req.body.content || "Contenuto mancante"
+    post.image = req.body.image || "https://www.consultingmc.info/wp-content/uploads/2024/01/No-Image-Placeholder.svg_.png"
+    post.tags = req.body.tags || "Tags mancanti"
 
     console.log(post)
-    res.status(200)
-    res.json({
+    res.status(200).json({
         status: 200,
         message: "Post aggiornato con successo",
         post
@@ -98,30 +91,20 @@ const modify = (req, res) => {
     const post = posts.find((elm) => elm.id === id)
 
     if (!post) {
-        res.status(404)
-        return res.json({
+        return res.status(404).json({
             status: 404, 
             error: "Not Found", 
             message: `Post con ID ${id} non trovato!` 
         })
     }
 
-    if (req.body.title) {
-        post.title = req.body.title;
-      }
-    if (req.body.content) {
-    post.content = req.body.content;
-    }
-    if (req.body.image) {
-    post.image = req.body.image;
-    }
-    if (req.body.tags) {
-    post.tags = req.body.tags;
-    }
+    post.title = req.body.title || post.title
+    post.content = req.body.content || post.content
+    post.image = req.body.image || post.image
+    post.tags = req.body.tags || post.tags
 
     console.log(post)
-    res.status(200)
-    res.json({
+    res.status(200).json({
         status: 200,
         message: "Post aggiornato con successo",
         post
@@ -136,8 +119,7 @@ const destroy = (req, res) => {
     const post = posts.find((post) => post.id === id)
 
     if (!post) {
-        res.status(404)
-        return res.json({
+        return res.status(404).json({
             status: 404, 
             error: "Not Found", 
             message: `Post con ID ${id} non trovato!`
