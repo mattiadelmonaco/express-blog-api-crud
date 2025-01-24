@@ -2,7 +2,11 @@
 
 const middlewareValidationId = (req, res, next) => {
     if (isNaN(req.params.id)) {
-        return res.sendStatus(400)
+        return res.status(400).json({
+            status: 400,
+            error: "Bad Request",
+            message: "ID inserito non correto"
+        })
     }
     next()
 }
