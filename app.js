@@ -3,6 +3,7 @@
 const posts = require("./data/postsData")
 const postsRouter = require("./routers/postsRouter")
 const notFound = require("./middlewares/notFound")
+const errorHandlerServer = require("./middlewares/errorHandlerServer")
 
 // Local server with express.js
 
@@ -18,6 +19,9 @@ app.use(express.json())
 
 // routers
 app.use("/posts", postsRouter)
+
+// server's errors
+app.use(errorHandlerServer)
 
 // route not found
 app.use(notFound)

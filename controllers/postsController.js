@@ -6,6 +6,7 @@ const posts = require("../data/postsData")
 
 // Index
 const index = (req, res) => {
+    // throw new Error("Errore interno del server")
 
     let filteredPosts = posts
     
