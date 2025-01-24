@@ -2,6 +2,7 @@
 
 const posts = require("./data/postsData")
 const postsRouter = require("./routers/postsRouter")
+const notFound = require("./middlewares/notFound")
 
 // Local server with express.js
 
@@ -17,6 +18,9 @@ app.use(express.json())
 
 // routers
 app.use("/posts", postsRouter)
+
+// route not found
+app.use(notFound)
 
 // console.log to show the using port
 app.listen(port, () => {
