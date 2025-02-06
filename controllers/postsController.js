@@ -33,7 +33,7 @@ const show = (req, res) => {
 
 // Store
 const create = (req, res) => {
-  const newId = posts[posts.length - 1].id + 1;
+  const newId = posts.length > 0 ? posts[posts.length - 1].id + 1 : 1; //se il post è vuoto e vuoi aggiungere dà 1 come id
 
   const newPost = {
     id: newId,
