@@ -131,4 +131,11 @@ const destroy = (req, res) => {
   return res.sendStatus(204);
 };
 
-module.exports = { index, show, create, update, modify, destroy };
+// DestroyAll
+const destroyAll = (req, res) => {
+  // throw new Error("Errore interno del server")
+  posts.splice(0, posts.length);
+  return res.sendStatus(204);
+};
+
+module.exports = { index, show, create, update, modify, destroy, destroyAll };

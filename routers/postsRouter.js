@@ -1,33 +1,36 @@
 // import middlewareValidationId
-const middlewareValidationId = require("../middlewares/validationIdParam")
+const middlewareValidationId = require("../middlewares/validationIdParam");
 
 // controllers imports
-const postsCrontroller = require("../controllers/postsController")
+const postsCrontroller = require("../controllers/postsController");
 
 // import express and create router's variable
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // validation on ID calls
-router.use("/:id", middlewareValidationId)
+router.use("/:id", middlewareValidationId);
 
-// Index 
-router.get("/", postsCrontroller.index)
+// Index
+router.get("/", postsCrontroller.index);
 
 // Show
-router.get("/:id", postsCrontroller.show)
+router.get("/:id", postsCrontroller.show);
 
 // Store
-router.post("/", postsCrontroller.create)
+router.post("/", postsCrontroller.create);
 
 // Update
-router.put("/:id", postsCrontroller.update)
+router.put("/:id", postsCrontroller.update);
 
 // Modify
-router.patch("/:id", postsCrontroller.modify)
+router.patch("/:id", postsCrontroller.modify);
 
 // Destroy
-router.delete("/:id", postsCrontroller.destroy)
+router.delete("/:id", postsCrontroller.destroy);
+
+// DestroyAll
+router.delete("/", postsCrontroller.destroyAll);
 
 // exports
-module.exports = router
+module.exports = router;
